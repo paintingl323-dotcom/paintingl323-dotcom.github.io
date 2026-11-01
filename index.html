@@ -148,8 +148,9 @@
   .why .n { font-family: var(--display); font-weight: 900; font-size: clamp(56px, 6vw, 88px); line-height: .9; color: var(--bg); -webkit-text-stroke: 3px var(--fg); paint-order: stroke fill; }
   .why b { display: block; margin-top: 10px; font-size: 20px; }
   .why p { margin: 4px 0 0; color: var(--muted); }
-  .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 72px; border-top: 1px solid var(--line); padding-top: 24px; }
-  .stats b { display: block; font-family: var(--display); font-weight: 900; font-size: clamp(56px, 8vw, 120px); line-height: 1; color: var(--accent); }
+  .stats-label { margin: 72px 0 0; }
+  .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 12px; border-top: 1px solid var(--line); padding-top: 24px; }
+  .stats b { display: block; font-family: var(--display); font-weight: 900; font-size: clamp(48px, 6vw, 96px); line-height: 1; color: var(--accent); white-space: nowrap; }
   .clients { list-style: none; padding: 0; margin: 0; }
   .clients a { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto; gap: 16px; align-items: baseline; padding-block: 22px; border-top: 1px solid var(--line); text-decoration: none; transition: padding .3s, color .3s; }
   .clients li:last-child a { border-bottom: 1px solid var(--line); }
@@ -157,6 +158,7 @@
   .clients .cname { font-weight: 900; font-size: clamp(24px, 3.4vw, 48px); line-height: 1.1; }
   @media (max-width: 760px) {
     .why li:nth-child(n) { grid-column: 1 / -1; margin-top: 0; }
+    .stats { grid-template-columns: 1fr; gap: 28px; }
     .clients a { grid-template-columns: 1fr auto; }
     .clients .cfield { grid-column: 1; grid-row: 2; }
   }
@@ -299,10 +301,11 @@
       <li data-reveal><span class="n tc">02</span><b>前 3 秒留人</b><p>開頭就講到對的人的痛點，讓會買的人停下來。</p></li>
       <li data-reveal><span class="n tc">03</span><b>結尾引導詢問</b><p>看完知道下一步：留言、私訊、問價。</p></li>
     </ol>
+    <p class="stats-label mono muted" data-reveal>實際戰績</p>
     <div class="stats" data-reveal>
-      <div><b class="tc">100+</b><span class="mono muted">剪過的短影音</span></div>
-      <div><b class="tc">6</b><span class="mono muted">合作過的產業</span></div>
-      <div><b class="tc">34</b><span class="mono muted">支作品可以看</span></div>
+      <div><b class="tc">半年</b><span class="mono muted">一支商品連續熱賣</span></div>
+      <div><b class="tc">近 100</b><span class="mono muted">位代理，幫品牌招進來</span></div>
+      <div><b class="tc">1,000 萬+</b><span class="mono muted">加盟商短時間衝出的業績</span></div>
     </div>
   </section>
 
@@ -317,7 +320,7 @@
   <section class="sec wrap" id="services">
     <div class="sec-head">
       <h2><span data-split>服務</span><span class="hollow" data-split>方案</span></h2>
-      <p data-reveal>剪輯照影片長度算，腳本一支加 800。需要到場拍攝請選包月，交通費另計。</p>
+      <p data-reveal>剪輯照影片長度算，加寫腳本一支多 2,000。需要到場拍攝請選包月，交通費另計。</p>
     </div>
     <div class="plans" id="plans"></div>
   </section>
@@ -393,12 +396,12 @@ const SITE = {
   ],
   // 純剪輯算法：60 秒以內 1,500，之後每多 30 秒加 800
   editPrice: { base: 1500, baseSec: 60, stepSec: 30, step: 800, examples: [60, 90, 120, 180] },
-  // 腳本費：每支 800（加在剪輯費上）
-  scriptPrice: 800,
+  // 腳本費：每支 2,000（加在剪輯費上，60 秒以內合計 3,500）
+  scriptPrice: 2000,
   plans: [
     { name: '純剪輯', edit: true, extra: 0, desc: '你提供素材，我負責剪輯、字幕、音效。', items: ['剪輯＋字幕＋音效', '修改 2 次'], c: 'var(--surface)', ink: 'var(--fg)', start: 1, span: 5, shift: '0px' },
     { name: '腳本＋剪輯', edit: true, extra: 'script', badge: '推薦', desc: '我幫你出選題、寫腳本，你照著腳本拍完，素材交給我剪。', items: ['選題＋腳本', '剪輯＋字幕＋音效', '修改 2 次'], c: 'var(--c4)', ink: 'var(--ink)', start: 6, span: 7, shift: '80px' },
-    { name: '包月 8 支', badge: '含拍攝', price: '22,000', unit: 'NT$／月 · 每月 8 支 · 平均一支 2,750', desc: '選題、腳本、拍攝、剪輯全部交給我，你只要準備好店面和產品。', items: ['每月選題規劃', '8 支腳本', '到場拍攝', '8 支剪輯＋字幕＋音效（每支 60 秒以內）', '交通費另計'], c: 'var(--c3)', ink: 'var(--ink)', start: 2, span: 7, shift: '0px' }
+    { name: '包月 8 支', badge: '含拍攝', price: '45,000', unit: 'NT$／月 · 每月 8 支 · 平均一支 5,625', desc: '選題、腳本、拍攝、剪輯全部交給我，你只要準備好店面和產品。', items: ['每月選題規劃', '8 支腳本', '到場拍攝', '8 支剪輯＋字幕＋音效（每支 60 秒以內）', '交通費另計'], c: 'var(--c3)', ink: 'var(--ink)', start: 2, span: 7, shift: '0px' }
   ],
   steps: [
     { t: '需求訪談', d: '30 分鐘線上聊產品和受眾。' },
